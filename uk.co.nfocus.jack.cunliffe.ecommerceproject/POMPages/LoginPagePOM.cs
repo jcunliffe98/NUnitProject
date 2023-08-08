@@ -18,7 +18,7 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
         }
 
         //Locators
-        private IWebElement _usernameField => _driver.FindElement(By.CssSelector("#username"));
+        private IWebElement _usernameField => _driver.FindElement(By.Id("username"));
         private IWebElement _passwordField
         {
             get
@@ -30,18 +30,16 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
 
         private IWebElement _submitButton => _driver.FindElement(By.Name("login"));
         //Service methods
-        public LoginPagePOM SetUsername(string username)
+        public void SetUsername(string username)
         {
             _usernameField.Clear();
             _usernameField.SendKeys(username);
-            return this;
         }
 
-        public LoginPagePOM SetPasssword(string password)
+        public void SetPasssword(string password)
         {
             _passwordField.Clear();
             _passwordField.SendKeys(password);
-            return this;
         }
 
         public void SubmitForm()

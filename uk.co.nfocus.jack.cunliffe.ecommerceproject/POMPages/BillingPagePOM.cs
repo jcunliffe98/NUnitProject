@@ -4,8 +4,10 @@ using OpenQA.Selenium.Support.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using uk.co.nfocus.jack.cunliffe.ecommerceproject.Utilities;
 
 namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
 {
@@ -29,41 +31,41 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
         private IWebElement _placeOrderTextBox => _driver.FindElement(By.CssSelector("#place_order"));
         private IWebElement _orderNumber => _driver.FindElement(By.CssSelector("#post-6 > div > div > div > ul > li.woocommerce-order-overview__order.order > strong"));
 
-        public void FillBillingInfo()
+        public void FillBillingInfo(string firstName, string lastName, string address, string city, string postcode, string phoneNumber)
         {
             var actions = new Actions(_driver);
             actions.MoveToElement(_phoneTextBox);
             actions.Perform();
-            FillName();
-            FillAddress();
+            FillName(firstName, lastName);
+            FillAddress(address, city, postcode, phoneNumber);
         }
 
-        public void FillName()
+        public void FillName(string firstName, string lastName)
         {
             _firstNameTextBox.Clear();
-            _firstNameTextBox.SendKeys("Jack");
+            _firstNameTextBox.SendKeys(firstName);
 
             _lastNameTextBox.Clear();
-            _lastNameTextBox.SendKeys("Cunliffe");
+            _lastNameTextBox.SendKeys(lastName);
 
             var actions = new Actions(_driver);
             actions.ScrollByAmount(0, 100);
             actions.Perform();
         }
 
-        public void FillAddress()
+        public void FillAddress(string address, string city, string postcode, string phoneNumber)
         {
             _addressTextBox.Clear();
-            _addressTextBox.SendKeys("24 London Street");
+            _addressTextBox.SendKeys(address);
 
             _cityTextBox.Clear();
-            _cityTextBox.SendKeys("London");
+            _cityTextBox.SendKeys(city);
 
             _postcodeTextBox.Clear();
-            _postcodeTextBox.SendKeys("SW1A 0AA");
+            _postcodeTextBox.SendKeys(postcode);
 
             _phoneTextBox.Clear();
-            _phoneTextBox.SendKeys("020 7219 4272");
+            _phoneTextBox.SendKeys(phoneNumber);
 
             var actions = new Actions(_driver);
             actions.ScrollByAmount(0, 100);

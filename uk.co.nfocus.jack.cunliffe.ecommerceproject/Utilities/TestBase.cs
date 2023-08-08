@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages;
+using OpenQA.Selenium.DevTools.V112.Page;
 
 namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.Utilities
 {
@@ -19,18 +21,6 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.Utilities
         [SetUp]
         public void Setup()
         {
-            //ChromeOptions options = new ChromeOptions(); //Create a browser specific options object
-            //options.AddArguments("--start-maximized"); //Chrome specific option
-            //driver = new ChromeDriver(options); //Pass the options to the browser on instantiation
-            //driver = new InternetExplorerDriver();
-
-            //FirefoxOptions options = new FirefoxOptions();
-            ////options.EnableMobileEmulation("Pixel 5");
-            ////options.AddArgument("--headless=new");
-            ////driver = new ChromeDriver(options);
-            //driver = new RemoteWebDriver(new Uri("http://172.30.190.244:4444/wd/hub"), options);
-
-
             string Browser = Environment.GetEnvironmentVariable("BROWSER");
 
             switch (Browser)
@@ -60,18 +50,18 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.Utilities
 
 
             driver.Manage().Window.Maximize();
-            //XBrowser friendly
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         [TearDown]
         public void TearDown()
         {
-            //Pause so we can see test effect
-            Thread.Sleep(5000); //Time in ms to wait
-            //Close the web browser
-            //driver.Close(); //Closes current tab (and browser if only one tab)
-            driver.Quit(); //Close browser, end driver server connectionas well - most common
+            NavPOM nav = new NavPOM(driver);
+
+            nav.NavigateToMyAccount();
+            nav.LogOut();
+
+            Thread.Sleep(5000);
+            driver.Quit();
         }
     }
 }

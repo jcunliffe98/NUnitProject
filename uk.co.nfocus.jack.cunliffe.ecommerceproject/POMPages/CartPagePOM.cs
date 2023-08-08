@@ -45,6 +45,7 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
         {
             _applyCoupon.Click();
             Thread.Sleep(3000);
+            //Sleep to avoid the animation
         }
 
         public bool CheckCoupon()
@@ -88,7 +89,6 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
         {
             var actions = new Actions(_driver);
             actions.MoveToElement(_proceedToCheckout);
-            actions.ScrollByAmount(0, 50);
             actions.Perform();
             _proceedToCheckout.Click();
         }
@@ -98,11 +98,6 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
             var actions = new Actions(_driver);
             actions.ScrollByAmount(0, -500);
             actions.Perform();
-        }
-
-        public void SelectMyAccount()
-        {
-            _myAccountbutton.Click();
         }
     }
 }

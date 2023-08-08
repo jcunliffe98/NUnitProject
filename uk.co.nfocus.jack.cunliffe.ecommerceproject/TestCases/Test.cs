@@ -14,31 +14,48 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.TestCases
     internal class HelloWebdriver : TestBase
     {
 
-        [Test, Order(1)]
-        public void CheckLoginLogoutCycle()
+        [Test]
+
+        public void Main()
+        {
+            Login();
+            GoToShop();
+            ApplyCoupon();
+        }
+        public void Login()
         {
             driver.Url = "https://www.edgewordstraining.co.uk/demo-site/my-account/";
             LoginPagePOM login = new LoginPagePOM(driver);
             login.Login("jack.cunliffe@nfocus.co.uk", "Mu3Wbu!AstG!!6Z");
-
+        }
+        
+        public void GoToShop()
+        {
             AccountPagePOM account = new AccountPagePOM(driver);
             account.SelectShop();
 
             ShopPagePOM shop = new ShopPagePOM(driver);
+            shop.DismissBanner();
             shop.AddItem();
             shop.ViewCart();
+        }
 
+        public void ApplyCoupon()
+        {
             CartPagePOM cart = new CartPagePOM(driver);
+
             cart.InputCoupon("edgewords");
             cart.ApplyCoupon();
+
             bool wasCouponAppliedSuccessfully = cart.CheckCoupon();
+
             try
             {
                 Assert.That(wasCouponAppliedSuccessfully, Is.True);
             }
             catch (AssertionException e)
             {
-                //Do nothing - just dont crash the test
+
             }
 
             bool isTotalCorrect = cart.CheckTotal();
@@ -48,11 +65,8 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.TestCases
             }
             catch (AssertionException e)
             {
-                //Do nothing - just dont crash the test
-            }
 
-            cart.SelectMyAccount();
-            account.LogOut();
+            }
         }
     }
 }

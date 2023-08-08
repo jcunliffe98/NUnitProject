@@ -19,8 +19,8 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.Utilities
 
         public void WaitForElement(By Locator, int TimeInSeconds)
         {
-            WebDriverWait myWait2 = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeInSeconds));
-            myWait2.Until(anythingatall => anythingatall.FindElement(Locator).Enabled);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(TimeInSeconds));
+            wait.Until(waitForElement => waitForElement.FindElement(Locator).Enabled);
         }
     }
 }

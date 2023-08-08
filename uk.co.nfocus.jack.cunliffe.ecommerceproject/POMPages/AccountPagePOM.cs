@@ -32,18 +32,9 @@ namespace uk.co.nfocus.jack.cunliffe.ecommerceproject.POMPages
             _ordersButton.Click();
         }
 
-        public bool CheckOrderNumber(string capturedOrderNumber)
+        public string ReturnOrderHistoryNumber()
         {
-            if("#" + capturedOrderNumber == _recentOrderNumber.Text)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void LogOut()
-        {
-            _logOutButton.Click();
+            return _recentOrderNumber.Text;
         }
     }
 }
